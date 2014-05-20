@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_dependency('actionpack', '=> 4.0.0', '< 5')
-  s.add_dependency('railties', '=> 4.0.0', '< 5')
+  s.add_dependency('actionpack', '>= 2.3', '< 5')
+  s.add_dependency('railties', '>= 2.3', '< 5')
   s.add_dependency('redis')
 end
