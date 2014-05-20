@@ -1,3 +1,5 @@
+require 'oj'
+
 module ActionDispatch
 	module Session
 		class RedisStore < ActionDispatch::Session::AbstractStore
