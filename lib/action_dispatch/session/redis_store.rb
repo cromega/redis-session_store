@@ -1,20 +1,20 @@
 require 'oj'
 
 module ActionDispatch
-	module Session
-		class RedisStore < ActionDispatch::Session::AbstractStore
-			def initialize(app, options = {})
-				super
+  module Session
+    class RedisStore < ActionDispatch::Session::AbstractStore
+      def initialize(app, options = {})
+        super
         @connection = options.delete(:connection)
         @expiry = options.fetch(:expire_after) { 2.weeks }
-			end
+      end
 
-			def get_session(env, session_id)
-				session_id ||= generate_sid
+      def get_session(env, session_id)
+        session_id ||= generate_sid
         key = redis_key(session_id)
 
         if @connection.exists(key)
-			  	session_data = Oj.load(@connection.get(key))
+          session_data = Oj.load(@connection.get(key))
         else
           session_data = {}
 
@@ -24,10 +24,10 @@ module ActionDispatch
           end
         end
 
-				[session_id, session_data]
-			end
+        [session_id, session_data]
+      end
 
-			def set_session(env, session_id, session_data, options)
+      def set_session(env, session_id, session_data, options)
         data = Oj.dump(session_data)
         key = redis_key(session_id)
         ttl = @connection.ttl(key)
@@ -38,20 +38,20 @@ module ActionDispatch
         end
 
         session_id
-			end
+      end
 
-			def destroy_session(env, session_id, options)
+      def destroy_session(env, session_id, options)
         key = redis_key(session_id)
-				@connection.del(key)
+        @connection.del(key)
 
-				generate_sid
-			end
+        generate_sid
+      end
 
-			private
+      private
 
-			def redis_key(session_id)
-				"session:#{session_id}"
-			end
-		end
-	end
+      def redis_key(session_id)
+        "session:#{session_id}"
+      end
+    end
+  end
 end
