@@ -5,3 +5,4 @@ gemspec
 gem 'redis'
 gem 'actionpack'
 gem 'railties'
+gem 'oj'

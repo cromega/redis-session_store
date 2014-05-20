@@ -14,5 +14,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('actionpack', '>= 2.3', '< 5')
   s.add_dependency('railties', '>= 2.3', '< 5')
+  s.add_dependency('oj')
   s.add_dependency('redis')
 end
