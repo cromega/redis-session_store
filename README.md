@@ -15,5 +15,4 @@ AwesomeApp::Application.config.session_store :redis_store,
 
 ## TODO
 
-* change session data structure in Redis for better expiration handling
 * add tests for more win

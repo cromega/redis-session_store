@@ -19,7 +19,7 @@ module ActionDispatch
           session_data = {}
 
           @connection.pipelined do
-            @connection.set(key, Oj.dump(session_data))
+            @connection.hset(key, 'data', OJ.dump(session_data))
             @connection.expire(key, @expiry)
           end
         end
@@ -30,12 +30,8 @@ module ActionDispatch
       def set_session(env, session_id, session_data, options)
         data = Oj.dump(session_data)
         key = redis_key(session_id)
-        ttl = @connection.ttl(key)
 
-        @connection.pipelined do
-          @connection.set(key, data)
-          @connection.expire(key, ttl)
-        end
+        @connection.hset(key, 'data', data)
 
         session_id
       end
